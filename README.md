@@ -14,9 +14,9 @@ Instale a versão mais recente do python em sua máquina, se você usa o Ubuntu 
 sudo apt-get install python3.6
 ```
 Com o pip instale o módulo psycopg2
-'''
+```
 pip3 install psycopg2
-'''
+```
 ### Instalando
 
 Nas linhas abaixo veremos os passos necessários para utilizar o projeto:
