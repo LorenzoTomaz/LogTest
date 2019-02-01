@@ -13,12 +13,16 @@ def consulta_views_slug():
 from log as A, articles as B where  concat('/article/', B.slug) = \
 A.path  and status = '200 OK' group by B.title order by count(A.path)\
  DESC limit 3;")
-    return con.fetchall() 
+    return con.fetchall()
+
+
 a = consulta_views_slug()
 
-for x,i in enumerate(a):
+
+for x, i in enumerate(a):
     print('* "{}" - {} views'.format(a[x][0], a[x][1]))
     code.write('\n* "{}" - {} views \n'.format(a[x][0], a[x][1]))
+
 
 def consulta_views_autor():
     db = psycopg2.connect("dbname=news")
@@ -32,9 +36,12 @@ concat('/article/', A.slug) = B.path and A.author = C.id and B.status =\
 b.author) as a, authors as c where a.author = c.id order by a.sum DESC)\
  as d;")
     return con.fetchall()
+
+
 a = consulta_views_autor()
 
-for x,i in enumerate(a):
+
+for x, i in enumerate(a):
     print('* {} - {} views'.format(a[x][0], int(a[x][1])))
     code.write('\n* {} - {} views \n'.format(a[x][0], int(a[x][1])))
 
@@ -50,9 +57,13 @@ def consulta_percent():
  '200 OK') as decimal) as porcentagem from log group by \
   DATE(time)) as B where B.porcentagem > 0.0100;")
     return con.fetchall()
+
+
 a = consulta_percent()
 
-for x,i in enumerate(a):
-    print('* "{}" - {} % errors'.format(a[x][0], round(100.00*float(a[x][1]),2)))
-    code.write('\n* {} - {}% errors \n'.format(a[x][0], \
-round(100.00*float(a[x][1]),2)))
+
+for x, i in enumerate(a):
+    print('* "{}" - {} % errors'.format(a[x][0], round(100.00*float(a[x][1]),
+2)))
+    code.write('\n* {} - {}% errors \n'.format(a[x][0],
+round(100.00*float(a[x][1]), 2)))
